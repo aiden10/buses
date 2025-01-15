@@ -1,0 +1,9 @@
+body {
+    font: normal 10px Verdana, Arial, sans-serif;
+    color: beige;
+    background-color: black;
+}
+
+#schedules {
+    text-align: center;
+}

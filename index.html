@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="javascript" href="functions.js">
+<link rel="stylesheet" href="index.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,15 @@
 </head>
 <body>
     <div id="schedules">
-        <div id="1"></div>
-        <div id="2"></div>
-        <div id="3"></div>
-        <div id="4"></div>
+        <div id="1161">
+            <h1>Home -> Away</h1>
+        </div>
+        <div id="1167">
+            <h1>Hazel -> Home</h1>
+        </div>
+        <div id="3943">
+            <h1>UW Plaza -> Home</h1>
+        </div>
     </div>
     <script>
         function formatTime(isoString) {
@@ -24,6 +30,19 @@
             });
             
             return timeStr;
+        }
+
+        function populateDiv(times, divId){
+            for (var i = 0; i < times.length; i++){
+                let time = times[i][0];
+                let route = times[i][1];
+                let from = times[i][2];
+                let destination = times[i][3];
+                const scheduleDiv = document.getElementById(divId);
+                var timeElement = document.createElement('h3');
+                timeElement.innerText = `Route: ${route} @ ${time}`;
+                scheduleDiv.appendChild(timeElement);
+            }
         }
 
         async function getBusTimes(stopId, limit){
@@ -55,14 +74,16 @@
                 const json = await response.json();
                 const arrivals = json.data.arrivals;
                 for (var i = 0; i < Object.keys(arrivals).length; i++){
-                    times.push(formatTime(arrivals[i].sortKey));
+                    times.push([formatTime(arrivals[i].sortKey), arrivals[i].route.id, arrivals[i].route.longName, arrivals[i].trip.headsign]);
                 }
-                return times.slice(0, limit);
+                populateDiv(times.slice(0, limit), stopId);
             } catch (e) {
                 console.error(e);
             }
         }
-
+        getBusTimes('1161', '5')
+        getBusTimes('1167', '5')
+        getBusTimes('3943', '5')
     </script>
 </body>
 </html>
