@@ -28,7 +28,7 @@ async function getBusTimes(stopId, limit){
                 "Sec-Fetch-Dest": "empty",
                 "Sec-Fetch-Mode": "cors",
                 "Sec-Fetch-Site": "cross-site",
-                "authorization": "Bearer 89858a2d-0497-46c7-876b-6f8ec4c99b94",
+                "authorization": "Bearer 89858a2d-0497-46c7-876b-6f8ec4c99b94", // not exactly ideal, but it also doesn't really matter much at all. 
                 "Priority": "u=4"
             },
             "referrer": "https://nextride.grt.ca/",
